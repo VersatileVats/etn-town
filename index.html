@@ -1,0 +1,1881 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ETN Town</title>
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./gameStyle.css?v=1.5" />
+
+    <!-- for the alpha quest game -->
+    <link rel="stylesheet" href="styles/style.css?v=1.5" />
+    <link rel="stylesheet" href="styles/animate.css?v=1.5" />
+  </head>
+
+  <body style="font-family: 'Josefin Sans', sans-serif">
+    <div id="notification" style="z-index: 500" class="notification">
+      Notifications will be shown here
+    </div>
+
+    <!-- tutorial image (#tutorialImage) -->
+    <img
+      id="tutorialImage"
+      style="
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(255, 255, 255);
+        border-radius: 0 0 10px 0;
+        z-index: 500;
+        width: 64px;
+      "
+      src="https://img.icons8.com/external-inipagistudio-mixed-inipagistudio/64/null/external-tutorial-online-crash-course-inipagistudio-mixed-inipagistudio.png" />
+
+    <!-- loader image (#loader) -->
+    <img
+      id="loader"
+      style="
+        display: none;
+        position: absolute;
+        top: 0px;
+        right: 0;
+        padding: 0px;
+        width: 200px;
+        z-index: 500;
+      "
+      src="./img/loader.svg"
+      height="100px" />
+
+    <!-- tutorial section (#tutorial) -->
+    <div
+      id="tutorial"
+      style="
+        z-index: 100;
+        height: 100vh;
+        display: none;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+      ">
+      <h2
+        id="heading"
+        style="
+          font-size: 2rem;
+          border: 3px solid;
+          border-radius: 5px;
+          margin-bottom: 5rem;
+        ">
+        Heading for the slide
+      </h2>
+      <div
+        style="
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+        ">
+        <div>
+          <img
+            id="leftKey"
+            onclick="leftOperation(currentTutorial)"
+            style="
+              visibility: hidden;
+              cursor: pointer;
+              background: rgb(255, 255, 255);
+              border-radius: 50%;
+            "
+            src="https://img.icons8.com/ios-glyphs/40/null/double-left--v1.png" />
+        </div>
+        <div id="imageDiv">
+          <img
+            id="image"
+            style="border-radius: 10px"
+            src="./img/bgd.jpg"
+            width="450"
+            alt="" />
+        </div>
+        <p
+          id="para"
+          style="
+            text-align: justify;
+            font-size: 1.3rem;
+            width: 50%;
+            line-height: 2rem;
+            border-radius: 10px;
+          ">
+          I am here to tell you about the various things that can be useful and
+          I will try my best to demonstrate the same
+        </p>
+        <div>
+          <img
+            id="rightKey"
+            onclick="rightOperation(currentTutorial)"
+            style="
+              visibility: hidden;
+              cursor: pointer;
+              background: rgb(255, 255, 255);
+              border-radius: 50%;
+            "
+            src="https://img.icons8.com/ios-glyphs/40/null/double-right--v1.png" />
+        </div>
+      </div>
+    </div>
+
+    <!-- landing section -->
+    <div id="landing-section">
+      <div id="full-form">
+        <p>Tells the full-form of this alphabet</p>
+      </div>
+      <div id="letters" style="text-align: center">
+        <img id="letter_s" src="img/p.png" alt="" />
+        <img id="letter_m" src="img/l.png" alt="" />
+        <img id="letter_a" src="img/a.png" alt="" />
+        <img id="letter_r" src="img/y.png" alt="" />
+        <!-- Connect wallet division -->
+        <div style="margin-top: 3rem">
+          <div style="display: flex; flex-direction: column">
+            <button
+              id="gameBtn"
+              class="btn-light"
+              style="
+                visibility: hidden;
+                margin: auto;
+                font-size: 20px;
+                border-radius: 8px;
+                margin-bottom: 8px;
+              ">
+              Connect Wallet
+            </button>
+            <button
+              id="judgeBtn"
+              onclick="loginAsJudge()"
+              class="btn-light"
+              style="
+                display: flex;
+                margin: auto;
+                margin-top: 8px;
+                font-size: 20px;
+                border-radius: 8px;
+              ">
+              Continue as a Judge
+            </button>
+          </div>
+          <p style="text-align: center; margin-top: 1rem">
+            <span id="walletDetails"></span>
+          </p>
+
+          <!-- Error division that will pop up whenever thers is a connectivity issue with the wallet -->
+          <p
+            id="walletError"
+            style="
+              color: red;
+              margin-top: 1rem;
+              visibility: hidden;
+              text-align: center;
+              background: rgba(255, 0, 0, 0.4);
+              backdrop-filter: blur(5px);
+              padding: 3px;
+              color: white;
+              border-radius: 10px;
+            ">
+            Error will pop up here
+          </p>
+        </div>
+      </div>
+
+      <div id="reasoning">
+        <p>
+          This is the text that will tell what is the reasoning for telling this
+        </p>
+      </div>
+    </div>
+
+    <!-- video game (#thetaGame)-->
+    <div
+      id="thetaGame"
+      style="
+        font-family: 'Josefin Sans', sans-serif;
+        display: none;
+        font-size: 1.1rem;
+        height: 100vh;
+        background: linear-gradient(to bottom, #9999ff 0%, #ff99cc 100%);
+      ">
+      <div
+        id="videoPlayground"
+        style="width: 90vw; height: 90vh; margin: auto; overflow: hidden">
+        <h1 style="text-align: center"><u>Video Playground</u></h1>
+
+        <div
+          id="videoDivInfo"
+          style="
+            width: 90%;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          ">
+          <h3>Level <span id="videoLevels">1</span>/9</h3>
+          <div id="videoTypes" style="display: flex">
+            <div
+              id="environment"
+              style="
+                display: none;
+                padding: 5px;
+                background: green;
+                color: white;
+                border-radius: 3px;
+                margin: 0 3px;
+              ">
+              Environment
+            </div>
+            <div
+              id="history"
+              style="
+                display: none;
+                padding: 5px;
+                background: green;
+                color: white;
+                border-radius: 3px;
+                margin: 0 3px;
+              ">
+              History
+            </div>
+            <div
+              id="technology"
+              style="
+                display: none;
+                padding: 5px;
+                background: green;
+                color: white;
+                border-radius: 3px;
+                margin: 0 3px;
+              ">
+              Technology
+            </div>
+          </div>
+        </div>
+
+        <!-- division where the videos & videoQuestions will be rendered -->
+        <h3 style="width: 90%; margin: auto">
+          Score: <span id="score">0</span>
+        </h3>
+
+        <!-- Q&A division -->
+        <div
+          style="
+            height: 60vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+          ">
+          <!-- videoQuestions & answers div -->
+          <div
+            id="videoQuestions"
+            style="
+              height: 90%;
+              width: 50%;
+              background: white;
+              border: 2px solid black;
+              border-radius: 20px 0px 0px 20px;
+              display: none;
+              justify-content: center;
+              align-items: center;
+            ">
+            <!-- video timer -->
+            <div id="videoTimer" style="font-size: 10rem"></div>
+
+            <div id="qna" style="display: none"></div>
+          </div>
+
+          <!-- video div -->
+          <div
+            id="video"
+            style="
+              height: 90%;
+              width: 50%;
+              border: 2px solid black;
+              border-radius: 0px 20px 20px 0px;
+              display: none;
+              justify-content: center;
+              align-items: center;
+            ">
+            <div
+              style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              ">
+              <div id="videoPlayer" style="text-align: center">
+                <!-- will be dynamically added -->
+              </div>
+              <div id="qnaTimer" style="font-size: 5rem; display: none">5</div>
+            </div>
+          </div>
+
+          <!-- start div that appears at the start and after giving answers / running out of time -->
+          <div
+            id="startDiv"
+            style="
+              height: 80%;
+              width: 100%;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-evenly;
+              align-items: center;
+            ">
+            <div>
+              <!-- <img id="correct" style="display: none" width="80" height="80" src="" alt="checked" /> -->
+              <img
+                id="correct"
+                style="display: none"
+                width="100"
+                height="100"
+                src="https://img.icons8.com/dotty/100/FFFFFF/check-all.png"
+                alt="check-all" />
+              <!-- <img id="wrong" style="display: none" width="80" height="80" src="https://img.icons8.com/dotty/80/FA5252/circled-x.png" alt="circled-x" /> -->
+              <img
+                id="wrong"
+                style="display: none"
+                width="100"
+                height="100"
+                src="https://img.icons8.com/dotty/100/FFFFFF/multiply-2.png"
+                alt="multiply-2" />
+            </div>
+            <div
+              id="completedAllLevels"
+              style="
+                display: none;
+                width: 90%;
+                margin: auto;
+                text-align: center;
+                color: green;
+                font-weight: bold;
+                font-size: 2rem;
+              ">
+              <p>
+                Congrats 🎉 you have completed all of the levels. Now you can go
+                back to the main village and play games there
+              </p>
+            </div>
+            <div id="instructions" style="text-align: justify">
+              <h2>Instructions to be followed for the game</h2>
+              <p>
+                a. This is a trivia game that will test your presence of mind by
+                showing you vidoes from various domains
+              </p>
+              <p>
+                b. For each video, you will get a stipulated time after which
+                the video will be closed automatically
+              </p>
+              <p>
+                c. You can get a video from one of these categories:
+                Environment, Technology & History
+              </p>
+              <p>
+                d. 4 questions for the video will be shown which have to be
+                completed in 30 seconds
+              </p>
+            </div>
+            <div id="videoProceed">
+              <button
+                class="btn-light"
+                style="border-radius: 08px; font-size: 20px">
+                Proceed
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- game screen (#game) -->
+    <div
+      id="game"
+      style="
+        display: none;
+        font-family: 'Josefin Sans', sans-serif;
+        overflow: hidden;
+        position: relative;
+        height: 90vh;
+      ">
+      <p
+        id="username"
+        style="
+          background: rgba(255, 255, 255, 1);
+          padding: 2px;
+          font-size: 1rem;
+          border-radius: 5px;
+          text-align: center;
+        ">
+        Hello judge, you are in the <b>Privileged Mode</b> and using the project
+        without the web3 wallet <br />Scores and progress will not be synced to
+        the server
+      </p>
+
+      <!-- left side division for the utilities (streak, balance, username & blockchain explorer) -->
+      <div
+        id="leftSideDiv"
+        style="
+          position: absolute;
+          left: 0;
+          top: 15vh;
+          height: 70vh;
+          display: flex;
+          /* align-items: center; */
+          align-items: flex-start;
+          flex-direction: column;
+          justify-content: space-around;
+        ">
+        <h2
+          id="levelJira"
+          style="
+            display: none;
+            float: left;
+            padding: 3px;
+            border: 5px solid black;
+            border-radius: 5px;
+            text-shadow: 1px 1px black;
+          ">
+          Level:<br /><b>01/06</b>
+        </h2>
+        <div id="streak" style="cursor: pointer; z-index: 5">
+          <img
+            src="https://img.icons8.com/color/64/null/distributed-counter.png" />
+        </div>
+        <div style="z-index: 5">
+          <p
+            id="balance"
+            style="
+              text-align: center;
+              background: rgba(235, 14, 7, 0.6);
+              color: white;
+              border-radius: 5px;
+              padding: 3px;
+            ">
+            Fetching
+          </p>
+        </div>
+        <div
+          id="openModal"
+          style="
+            cursor: pointer;
+            z-index: 5;
+            border-radius: 50%;
+            padding: 12px;
+            background-color: rgba(76, 215, 26, 0.7);
+          ">
+          <img
+            src="https://img.icons8.com/cotton/64/null/blockchain-checked.png" />
+        </div>
+      </div>
+
+      <!-- right side division for the utilities (weekly rewards, ndt section & music section) -->
+      <div
+        id="rightSideDiv"
+        style="
+          position: absolute;
+          /* right: 30px; */
+          right: 0;
+          top: 15vh;
+          display: flex;
+          flex-direction: column;
+          height: 70vh;
+          justify-content: space-around;
+          align-items: center;
+        ">
+        <h2
+          id="timeJira"
+          style="
+            display: none;
+            float: right;
+            color: red;
+            border: 5px solid red;
+            padding: 10px;
+            border-radius: 50%;
+          ">
+          10
+        </h2>
+        <div id="weeklyRewards" style="cursor: pointer; z-index: 5">
+          <img
+            width="64"
+            height="64"
+            src="https://img.icons8.com/external-flaticons-flat-flat-icons/64/external-rewards-home-based-business-flaticons-flat-flat-icons-2.png"
+            alt="external-rewards-home-based-business-flaticons-flat-flat-icons-2" />
+        </div>
+        <div
+          style="
+            z-index: 5;
+            border-radius: 10px;
+            padding: 0px 5px;
+            font-weight: bold;
+            background: rgba(26, 67, 215, 0.7);
+            color: white;
+          ">
+          <h3 style="margin: 0; padding: 4px">
+            Score: <span id="overAllScore"></span>
+          </h3>
+        </div>
+        <div
+          class="musicOptions"
+          style="
+            display: block;
+            width: 120px;
+            justify-content: space-evenly;
+            text-align: left;
+            background: rgba(76, 215, 26, 0.7);
+            border-radius: 10px;
+            z-index: 10;
+            padding: 6px;
+            color: white;
+          ">
+          <p id="defaultSong">Default Song</p>
+          <p id="drive">Drive</p>
+          <p id="wallpaper">Wallpaper</p>
+          <p id="fluffingDuck">Fluffing Duck</p>
+          <p id="powerfulTrap">Powerful Trap</p>
+          <p id="darkPassenger">Dark Passenger</p>
+        </div>
+      </div>
+
+      <!-- Modal section that handles many things -->
+      <section class="modal hidden">
+        <h2
+          style="
+            text-align: center;
+            border: 3px solid black;
+            box-shadow: 3px 2px 2px;
+          ">
+          Transaction Logs
+        </h2>
+        <section
+          id="paymentDetails"
+          style="display: none; text-align: center; padding: 5px">
+          <p>
+            <!-- <span style="font-weight: bold">Amount: </span
+            > -->
+            <span id="paymentAmount"></span>
+          </p>
+          <p>
+            <span style="font-weight: bold">Purpose: </span
+            ><span id="paymentMemo"></span>
+          </p>
+        </section>
+        <section id="weeklySection" style="display: none">
+          <p id="rewardsInfo" style="text-align: justify">
+            Here you can see the players with highest points scored in this
+            week. A table having the deatils of top 2 highest scorer are shown
+            below. Look out for a special message if you are the top scorer
+          </p>
+          <p
+            style="
+              width: 100%;
+              margin-bottom: 10px;
+              text-align: center;
+              color: green;
+            ">
+            <span id="weekDate" style="text-decoration: underline"></span>
+          </p>
+          <p
+            id="weeklyError"
+            style="
+              display: none;
+              padding: 5px;
+              text-align: center;
+              background: rgba(235, 14, 7, 0.6);
+              border: 7px;
+            ">
+            Oops, it seems that all of the weekly rewards' NFTs are exhausted.
+            Don't worry, new ones are coming soon 🤟
+          </p>
+          <section
+            style="
+              margin-top: 10px;
+              margin-bottom: 10px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            ">
+            <p
+              style="
+                box-shadow: 5px 5px rgba(209, 192, 255, 1);
+                width: 100%;
+                text-align: center;
+                margin: auto;
+                padding: 5px;
+                border-radius: 15px;
+                border: 2px solid green;
+              ">
+              This week's rewards: <br /><br />
+              <b>5 ETN</b>
+            </p>
+            <img
+              style="
+                box-shadow: 5px 5px rgba(209, 192, 255, 1);
+                width: 45%;
+                border-radius: 15px;
+              " />
+            <table id="weeklyTable" style="width: 60%">
+              <!--<tr>-->
+              <!--<th>Rank</th> -->
+              <!--    <th>Username</th>-->
+              <!--    <th>Points</th>-->
+              <!--</tr>-->
+            </table>
+            <article
+              id="weeklyInfoError"
+              style="
+                width: 50%;
+                display: none;
+                text-align: justify;
+                margin: 15px;
+              ">
+              None of the registered users have started playing. It's time to
+              get your first point. Start playing 👍
+            </article>
+            <article
+              id="weeklyInfo"
+              style="
+                width: 50%;
+                display: none;
+                text-align: justify;
+                margin: 15px;
+              ">
+              Hurray 🥳, you are the top scorer as of now. Keep up the momentum
+            </article>
+          </section>
+          <article
+            id="description"
+            style="text-align: justify; margin: 15px"></article>
+        </section>
+
+        <!-- show streak section -->
+        <section id="showStreak" style="display: none">
+          <p>
+            Your streak as of today is of
+            <span style="text-decoration: underline"
+              ><span id="streak">5</span> day(s)</span
+            >
+            Below are the benefits of a better streak:
+          </p>
+          <table style="margin: 10px">
+            <tr>
+              <th>Streak</th>
+              <th>Benefits</th>
+            </tr>
+            <tr>
+              <td>1 day</td>
+              <td>0.000015 ETN on login</td>
+            </tr>
+            <tr>
+              <td>2 days</td>
+              <td>0.000017 ETN on login</td>
+            </tr>
+            <tr>
+              <td>3+ days</td>
+              <td>
+                0.000019 ETN on login & 0.000007 ETN for clearing a level in
+                tiles & video game
+              </td>
+            </tr>
+          </table>
+        </section>
+
+        <!-- confirmation section -->
+        <section id="confirmation" style="display: none">
+          <p style="text-align: center; font-weight: bold">
+            Do you want to continue the purchase?
+          </p>
+          <article
+            style="
+              display: flex;
+              justify-content: space-around;
+              align-items: center;
+              color: black;
+            ">
+            <span
+              style="
+                font-size: 1.1rem;
+                padding: 10px;
+                background: rgba(76, 215, 26, 0.7);
+                border-radius: 30%;
+                cursor: pointer;
+              "
+              id="yes"
+              >Yes</span
+            >
+            <span
+              style="
+                font-size: 1.1rem;
+                padding: 10px;
+                background: rgba(235, 14, 7, 0.6);
+                border-radius: 30%;
+                cursor: pointer;
+              "
+              id="no"
+              >No</span
+            >
+          </article>
+        </section>
+
+        <!--payment flow section -->
+        <section
+          id="paymentFlow"
+          style="
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+          ">
+          <img
+            id="step1"
+            style="width: 20%; filter: grayscale(100%)"
+            src="https://img.icons8.com/cotton/128/buy-with-card.png" />
+          <img
+            id="step2"
+            style="width: 20%; filter: grayscale(100%)"
+            src="https://img.icons8.com/external-flaticons-flat-flat-icons/100/null/external-digital-signature-automation-technology-flaticons-flat-flat-icons.png" />
+          <img
+            id="step4"
+            style="width: 20%; filter: grayscale(100%)"
+            src="https://img.icons8.com/nolan/100/change.png" />
+        </section>
+
+        <!-- Timer that will show how long does the transaction takes -->
+        <section
+          id="timer"
+          style="
+            text-align: center;
+            background: rgba(26, 67, 215, 0.7);
+            border-radius: 5px;
+            padding: 5px;
+            color: white;
+            display: none;
+          ">
+          0 second elapsed
+        </section>
+
+        <!-- Section in which table and stuff will be appended -->
+        <div
+          style="display: block; max-height: 140px; overflow-y: scroll"></div>
+        <button class="btn-close">Close</button>
+      </section>
+
+      <div class="overlay hidden"></div>
+
+      <div
+        id="gameCanvas"
+        style="
+          width: 100%;
+          text-align: center;
+          position: relative;
+          display: flex;
+          height: 95vh;
+        ">
+        <canvas style="border-radius: 5px; margin: auto"></canvas>
+        <div
+          id="homeDiv"
+          style="
+            padding: 5px;
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            border-radius: 5px;
+            color: whitesmoke;
+            background: rgba(76, 215, 26, 0.9);
+            z-index: 500;
+            text-align: left;
+          "></div>
+        <div
+          id="overlappingDiv"
+          style="
+            background-color: black;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 10;
+          "></div>
+      </div>
+
+      <!-- flip the tiles game div -->
+      <div
+        id="atlassianBitbucketGame"
+        style="display: none; flex-direction: column; height: 95vh">
+        <div
+          id="gameContainer"
+          style="border-radius: 20px; background-color: white">
+          <div
+            id="gameStats"
+            style="
+              position: relative;
+              padding: 0px 10px;
+              margin-bottom: 5px;
+              display: flex;
+              flex-wrap: no-wrap;
+              justify-content: space-between;
+              align-items: center;
+            ">
+            <img
+              id="backToHome"
+              src="./img/backHome.png"
+              width="45"
+              height="45"
+              style="
+                border-radius: 50%;
+                cursor: pointer;
+                position: absolute;
+                left: -50px;
+              " />
+            <div>
+              <h3 id="currentPairMade"></h3>
+              <h3 id="currentDifficultyUI"></h3>
+            </div>
+            <h1 id="levelInfo"></h1>
+            <div id="lives"></div>
+            <img
+              id="nextLevel"
+              src="./img/next.png"
+              width="45"
+              height="45"
+              style="
+                display: none;
+                cursor: pointer;
+                position: absolute;
+                right: -50px;
+                border-radius: 50%;
+                border: 2px solid black;
+              " />
+            <img
+              id="helpBitbucket"
+              style="
+                border-radius: 50%;
+                display: block;
+                cursor: pointer;
+                pointer-events: none;
+              "
+              src="./img/help.png"
+              width="45"
+              height="45"
+              alt="" />
+          </div>
+        </div>
+
+        <div
+          id="levelsCompletedDiv"
+          style="
+            cursor: pointer;
+            color: white;
+            display: none;
+            font-size: 1.3rem;
+            text-align: center;
+            margin: auto;
+            width: 50vw;
+            margin-top: 30vh;
+            background: green;
+            border-radius: 10px;
+          "></div>
+
+        <div id="bitbucketGameDiv">
+          <!-- the inner content will be dynamically added to the UI -->
+        </div>
+      </div>
+
+      <!-- maze runner game -->
+      <div id="atlassianJiraGame" style="display: none; height: 95vh">
+        <div
+          id="clearedJiraLevels"
+          style="
+            display: none;
+            width: 50vw;
+            margin: auto;
+            background: green;
+            padding: 10px;
+            margin-top: 25vh;
+            text-align: center;
+            border-radius: 7px;
+            color: white;
+          ">
+          <h3>
+            Hurray, you have completed the game. Wait for the stats to be
+            fetched tomorrow and then you can again start playing
+          </h3>
+        </div>
+        <canvas id="jiraGame" style="border-radius: 5px; margin: auto"></canvas>
+      </div>
+
+      <!-- alpha quest game -->
+      <div id="gameDiv" style="display: none">
+        <div id="heading" style="position: relative; height: 150px">
+          <!-- week & days info -->
+          <div id="timelineInfo" style="left: -15rem; top: 0">
+            <h3 style="margin: 0">Week: <span id="week"></span></h3>
+            <h3 style="margin: 0">Day: <span id="day"></span></h3>
+          </div>
+
+          <p
+            id="backToGame"
+            style="
+              position: absolute;
+              right: -15rem;
+              top: 0;
+              text-align: right;
+              text-decoration: underline;
+              cursor: pointer;
+            ">
+            Back to home
+          </p>
+
+          <h1>Alpha Quest</h1>
+          <p id="npatTimer"></p>
+          <p id="questionTimer">
+            Answer the questions in <span id="questionTime"></span> secs
+          </p>
+        </div>
+
+        <div id="scoreDiv">
+          <h3>Score: <span id="score"></span></h3>
+        </div>
+
+        <div id="wordsDiv">
+          <!-- dynamically populated -->
+          <div id="words">
+            <!-- <img
+              width="40"
+              height="40"
+              style="padding: 4px"
+              src="assets/a.png"
+              alt="a" /> -->
+          </div>
+
+          <div id="alphaReasoning" style="display: none">
+            <h2 style="margin-bottom: 0.5rem">Answers for P</h2>
+            <p
+              style="display: flex; align-items: center; margin-bottom: 0.5rem">
+              <img
+                src="assets/name.png"
+                width="24"
+                style="margin-right: 4px" />Edison invented the light bulb.
+            </p>
+            <p
+              style="display: flex; align-items: center; margin-bottom: 0.5rem">
+              <img
+                src="assets/place.png"
+                width="24"
+                style="margin-right: 4px" />Edinburgh is a historic Scottish
+              city.
+            </p>
+            <p
+              style="display: flex; align-items: center; margin-bottom: 0.5rem">
+              <img
+                src="assets/animal.png"
+                width="24"
+                style="margin-right: 4px" />Eagles are known for their sharp
+              vision.
+            </p>
+            <p
+              style="display: flex; align-items: center; margin-bottom: 0.5rem">
+              <img
+                src="assets/thing.png"
+                width="24"
+                style="margin-right: 4px" />Eggs are a popular source of
+              protein.
+            </p>
+          </div>
+        </div>
+
+        <div id="help">
+          <h2>Rules of the game</h2>
+          <ul>
+            <li>A level can be played only once</li>
+            <li>Hit "Backspace" to go back to the game map</li>
+            <li>+5 for passing a level & -3 for wrong answers</li>
+            <li>Each day will have a new batch of four characters</li>
+            <li>The answers will be auto submitted after 30 seconds</li>
+            <li>
+              Tap on the colored aplhabet, & answer questions related to Name,
+              Place, Animal, & Thing
+            </li>
+          </ul>
+        </div>
+
+        <div id="qa-section" style="display: none">
+          <!-- <h1>Q&A Section</h1> -->
+          <div id="questions-container">
+            <!-- Questions will be dynamically inserted here -->
+          </div>
+          <button id="submit-button" disabled>Submit Answers</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- error division -->
+    <div
+      id="errorDivision"
+      style="display: none; position: absolute; top: 0; left: 0">
+      <h2
+        style="
+          width: 100vw;
+          height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: rgba(100, 147, 42, 0.7);
+          color: white;
+          margin: 0;
+        ">
+        <span
+          style="
+            margin: 10px;
+            text-align: center;
+            border: 8px solid black;
+            border-radius: 8px;
+            padding: 5px;
+            height: auto;
+          ">
+          <u style="color: black"
+            >If you are watching this screen, then it must be due the following
+            reason:</u
+          >
+          <br />
+          <ul></ul>
+          <p style="text-align: center; text-decoration: underline">
+            Refresh the page to go back
+          </p>
+        </span>
+      </h2>
+    </div>
+
+    <!-- stats show section -->
+    <div
+      id="finalStats"
+      style="
+        display: none;
+        font-size: 1rem;
+        position: absolute;
+        bottom: 10px;
+        width: 80vw;
+        left: 10vw;
+        text-align: center;
+      "></div>
+
+    <!-- gsap needed for animating things on the landing page & in the npat game  -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
+      integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+    <!-- needed by npat and landing page  -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"
+      integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"></script>
+
+    <script src="./audio.js?v=1.0"></script>
+
+    <!-- defining the CANVAS dimensions -->
+    <script>
+      let innerHeight = 550;
+      let innerWidth = 900;
+    </script>
+
+    <!-- variables script -->
+    <script>
+      // boolean for player movement
+      let movePlayer = false;
+      let totalVideoLevels = 0;
+
+      let anotherChain = false;
+      let chainExplorer = "";
+
+      let streak;
+      let visited;
+      let score = 0;
+      let signupResult;
+
+      let walletName;
+      let changeAddress;
+
+      let transactions = "";
+      let purchasedSongs = "";
+      let mainSong = defaultSong;
+      let weeklyRewardsImage = "";
+
+      let modal = document.querySelector(".modal");
+      let overlay = document.querySelector(".overlay");
+      let balanceDiv = document.querySelector("#balance");
+      let paymentMemo = document.querySelector("#paymentMemo");
+      let closeModalBtn = document.querySelector(".btn-close");
+      let walletError = document.querySelector("#walletError");
+      let confirmation = document.querySelector("#confirmation");
+      let paymentAmount = document.querySelector("#paymentAmount");
+      let paymentDetails = document.querySelector("#paymentDetails");
+
+      function positionModal() {
+        const height = document.querySelector(".modal").clientHeight;
+        const width = document.querySelector(".modal").clientWidth;
+      }
+
+      // toggleZIndex function
+      function toggleZIndex(el = "") {
+        const itr = [
+          document.querySelector("#weeklyRewards"),
+          document.querySelector("#streak"),
+          document.querySelector("#openModal"),
+        ];
+        for (let a = 0; a < itr.length; a++) {
+          el != "" ? (itr[a].style.zIndex = "0") : (itr[a].style.zIndex = "5");
+        }
+        if (el != "") document.querySelector(`#${el}`).style.zIndex = "5";
+      }
+
+      let toggleClasses = [modal, overlay];
+      let songsMap = [
+        defaultSong,
+        drive,
+        wallpaper,
+        fluffingDuck,
+        powerfulTrap,
+        darkPassenger,
+      ];
+
+      let step1 = document.querySelector("#step1");
+      let step2 = document.querySelector("#step2");
+      let step4 = document.querySelector("#step4");
+      let timer = document.querySelector("#timer");
+      let paymentFlow = document.querySelector("#paymentFlow");
+
+      function highlightStreak(streak) {
+        const rows = document.querySelectorAll("#showStreak tbody tr");
+        streak = streak >= 3 ? 3 : streak;
+
+        // Select the corresponding row and first td
+        const targetTd = rows[streak].querySelector("td");
+        if (targetTd) {
+          targetTd.style.backgroundColor = "rgba(0, 255, 0, 0.4)";
+        }
+      }
+
+      document.querySelector("#streak").addEventListener("click", () => {
+        document.querySelector("#streak").style.pointerEvents = "none";
+        document.querySelector(".musicOptions").style.pointerEvents = "none";
+
+        toggleZIndex("streak");
+        toggleClasses.forEach((el) => el.classList.remove("hidden"));
+        document.querySelector(".modal h2").textContent = "Streak Section";
+        document.querySelector(".modal div").style.display = "none";
+        document.querySelector("#showStreak").style.display = "block";
+        document.querySelector("#showStreak span#streak").textContent = streak;
+
+        highlightStreak(streak);
+        positionModal();
+      });
+
+      document
+        .querySelector("#weeklyRewards")
+        .addEventListener("click", async () => {
+          document.querySelector("#weeklyRewards").style.pointerEvents = "none";
+          document.querySelector(".musicOptions").style.pointerEvents = "none";
+          await gettingWeeklyStats();
+          toggleZIndex("weeklyRewards");
+          toggleClasses.forEach((el) => el.classList.remove("hidden"));
+          document.querySelector(".modal div").style.display = "none";
+          document.querySelector("#weeklySection").style.display = "block";
+          document.querySelector(
+            "#weekDate"
+          ).innerHTML = `Weekly stats will be refreshed every Sunday at 12:30 PM GMT<br><br><span style="color: black;">You have earned <b><span id="tadaRewards">${parseFloat(
+            signupResult["earnedTRX"]
+          )}</span> ETN</b> as of now</span><br><br>`;
+
+          positionModal();
+        });
+
+      function incScore(localScore) {
+        if (!judgeMode)
+          callBackend(
+            { wallet: changeAddress, score: localScore },
+            "updateScore"
+          );
+        score += localScore;
+        document.querySelector("#overAllScore").innerHTML =
+          parseInt(document.querySelector("#overAllScore").innerHTML) +
+          parseInt(localScore);
+      }
+    </script>
+
+    <!-- weekly stats -->
+    <script>
+      async function gettingWeeklyStats() {
+        document.querySelector("#weeklyTable").innerHTML = "";
+        document.querySelector(".modal h2").innerHTML = "Weekly Rewards Info";
+
+        let mainTR = document.createElement("tr");
+        let firstTH = document.createElement("th");
+        firstTH.textContent = "Username";
+        mainTR.appendChild(firstTH);
+        let secondTH = document.createElement("th");
+        secondTH.textContent = "Points";
+        mainTR.appendChild(secondTH);
+        document.querySelector("#weeklyTable").appendChild(mainTR);
+
+        var requestOptions = {
+          method: "GET",
+          redirect: "follow",
+        };
+
+        let results = await fetch(
+          "./server.php?action=weeklyRewards",
+          requestOptions
+        )
+          .then((response) => response.json())
+          .then((result) => result)
+          .catch((error) => console.log("error", error));
+
+        document.querySelector("#weeklyTable").style.display = "block";
+        document.querySelector("#weeklyInfo").style.display = "none";
+        document.querySelector("#weeklyInfoError").style.display = "none";
+
+        document.createElement("tr").innerHTML = "";
+
+        // No one has yet scored a point
+        if (results.length == 0) {
+          document.querySelector("#weeklyTable").style.display = "none";
+          document.querySelector("#weeklyInfoError").style.display = "block";
+        }
+        // the current palyer is the highest scorer
+        else if (results[0]["walletAddress"] == changeAddress) {
+          document.querySelector("#weeklyTable").style.display = "none";
+          document.querySelector("#weeklyInfo").style.display = "block";
+        }
+        // Someone has scored and the current player is not the highest scorer
+        else {
+          for (let result in results) {
+            let tr = document.createElement("tr");
+            let td = document.createElement("td");
+            td.textContent = `${results[result]["walletAddress"].slice(
+              0,
+              20
+            )}...`;
+            tr.appendChild(td);
+            td = document.createElement("td");
+            td.textContent = results[result]["score"];
+            tr.appendChild(td);
+
+            document.querySelector("#weeklyTable").appendChild(tr);
+          }
+        }
+      }
+    </script>
+
+    <!-- for queuing up the notifications  -->
+    <script>
+      let notificationQueue = [];
+      let isNotificationShowing = false;
+      let notificationElement = document.getElementById("notification");
+
+      function showNotification(
+        message,
+        color = "rgba(0, 255, 0, 0.6)",
+        duration = 2500
+      ) {
+        notificationQueue.push({ message, color, duration });
+        processNotificationQueue();
+      }
+
+      function processNotificationQueue() {
+        if (isNotificationShowing || notificationQueue.length === 0) {
+          return;
+        }
+
+        const { message, color, duration } = notificationQueue.shift();
+        isNotificationShowing = true;
+
+        notificationElement.style.color =
+          color === "rgba(255, 0, 0, 0.6)" ? "white" : "black";
+
+        notificationElement.style.backgroundColor = color;
+        notificationElement.innerHTML = message;
+
+        // Key change: Remove 'hide' class *before* adding 'show'
+        notificationElement.classList.remove("hide"); // Clear any previous hide
+        notificationElement.classList.add("show"); // Then show
+
+        setTimeout(() => {
+          notificationElement = document.getElementById("notification");
+          notificationElement.classList.remove("show"); // Hide after timeout
+
+          setTimeout(() => {
+            // Timeout for the hide transition
+            notificationElement.classList.add("hide");
+            isNotificationShowing = false;
+            processNotificationQueue(); // Process the next one
+          }, 300); // Duration of your hide transition (adjust as needed)
+        }, duration);
+      }
+    </script>
+
+    <!-- for the alpha quest (npat) game -->
+    <script src="./npatScripts/q&amp;a.js?v=5.0"></script>
+    <script src="./npatScripts/script.js?v=5.0"></script>
+
+    <!-- for the three games (maze, flip, video) -->
+    <script src="./video.js?v=9.1"></script>
+    <script src="./data/collisions.js?v=9.1"></script>
+    <script src="./classes.js?v=9.1"></script>
+    <script src="./bitGame.js?v=9.1"></script>
+    <script src="./script.js?v=9.1"></script>
+
+    <!-- for electroneum bloackchain -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.4.0/web3.min.js"></script>
+    <script src="./etn.js?v=9.1"></script>
+
+    <!-- music functionality script -->
+    <script>
+      function controlMainSong(song, control) {
+        mainSong.stop();
+        if (song["_src"].includes("defaultSong")) {
+          // control == "play" ? defaultSong.play() : defaultSong.stop()
+          if (control == "play") {
+            mainSong = defaultSong;
+            // boughtableSongs.forEach(el => el.stop())
+            defaultSong.play();
+          } else defaultSong.stop();
+        } else if (song["_src"].includes("darkPassenger")) {
+          if (control == "play") {
+            if (purchasedSongs.includes("2")) mainSong = darkPassenger;
+            // boughtableSongs.forEach(el => el.stop())
+            darkPassenger.play();
+          } else darkPassenger.stop();
+        } else if (song["_src"].includes("drive")) {
+          if (control == "play") {
+            if (purchasedSongs.includes("3")) mainSong = drive;
+            // boughtableSongs.forEach(el => el.stop())
+            drive.play();
+          } else drive.stop();
+        } else if (song["_src"].includes("fluffingDuck")) {
+          if (control == "play") {
+            if (purchasedSongs.includes("4")) mainSong = fluffingDuck;
+            // boughtableSongs.forEach(el => el.stop())
+            fluffingDuck.play();
+          } else fluffingDuck.stop();
+        }
+        // makePayment(`Getting a hint for level ${currentLevel} & pair no ${currentPairMadeCount + 1}`, 0.01, {
+        else if (song["_src"].includes("powerfulTrap")) {
+          if (control == "play") {
+            if (purchasedSongs.includes("5")) mainSong = powerfulTrap;
+            // boughtableSongs.forEach(el => el.stop())
+            powerfulTrap.play();
+          } else powerfulTrap.stop();
+        } else if (song["_src"].includes("wallpaper")) {
+          if (control == "play") {
+            if (purchasedSongs.includes("6")) mainSong = wallpaper;
+            // boughtableSongs.forEach(el => el.stop())
+            // else buySong("Buying the Powerful Trap Music", 2.5, { musicNo: 6 })
+            wallpaper.play();
+          } else wallpaper.stop();
+        }
+      }
+
+      const attachEventListeners = () => {
+        for (let a = 1; a <= 6; a++) {
+          const musicOption = document.querySelector(
+            `.musicOptions :nth-child(${a})`
+          );
+
+          musicOption.style.cursor = "pointer";
+          musicOption.style.color = "black";
+
+          if (purchasedSongs.includes(`${a}`)) {
+            musicOption.style.borderRadius = "2px";
+            musicOption.style.border = "2px solid black";
+            musicOption.style.padding = "2px";
+          }
+
+          musicOption.addEventListener("mouseenter", (el) => {
+            el.target.style.cursor = "pointer";
+            controlMainSong(mainSong, "stop");
+            let song = el.target.getAttribute("id");
+            if (song == "defaultSong") controlMainSong(defaultSong, "play");
+            else if (song == "darkPassenger")
+              controlMainSong(darkPassenger, "play");
+            else if (song == "drive") controlMainSong(drive, "play");
+            else if (song == "fluffingDuck")
+              controlMainSong(fluffingDuck, "play");
+            else if (song == "powerfulTrap")
+              controlMainSong(powerfulTrap, "play");
+            else if (song == "wallpaper") controlMainSong(wallpaper, "play");
+          });
+
+          musicOption.addEventListener("mouseleave", (el) => {
+            controlMainSong(mainSong, "play");
+            let song = el.target.getAttribute("id");
+            if (song == "darkPassenger") controlMainSong(darkPassenger, "stop");
+            else if (song == "drive") controlMainSong(drive, "stop");
+            else if (song == "fluffingDuck")
+              controlMainSong(fluffingDuck, "stop");
+            else if (song == "powerfulTrap")
+              controlMainSong(powerfulTrap, "stop");
+            else if (song == "wallpaper") controlMainSong(wallpaper, "stop");
+          });
+
+          // else buySong("Buying the Powerful Trap Music", 2.5, { musicNo: 6 })
+          musicOption.addEventListener("click", (el) => {
+            songsMap.forEach((item, ind) => {
+              if (
+                item["_src"].includes(el.target.getAttribute("id")) &&
+                ind != 0
+              ) {
+                // avoiding buying the already purchased song
+                if (purchasedSongs.includes(`${ind + 1}`)) return;
+                const etnForSongs = [
+                  0, 0.000005, 0.0000075, 0.00001, 0.0000125, 0.000015,
+                ];
+
+                purchaseCall(
+                  `${etnForSongs[ind]}`,
+                  `Buying the ${el.target.getAttribute("id")} music Track`,
+                  `${ind + 1}`
+                );
+                // askChoice(`${0.5 * ind}`, `Purchasing the music track: ${el.target.getAttribute("id")}`)
+              }
+            });
+          });
+        }
+      };
+    </script>
+
+    <!-- proceed button (for judges)  -->
+    <script>
+      // the checks are only for the players (judges will bypass them)
+      document
+        .querySelector("#gameBtn")
+        .addEventListener("click", async (e) => {
+          if (e.target.textContent.trim() == "Connect Wallet") {
+            connectMetaMask();
+          } else {
+            if (
+              signupResult == undefined ||
+              signupResult.score == undefined ||
+              chainExplorer == ""
+            ) {
+              document.querySelector("#landing-section").style.display = "flex";
+              document.querySelector("#walletError").style.visibility =
+                "visible";
+              document.querySelector("#walletError").textContent =
+                "Unbale to connect with Metamask! Refreshing in 2 seconds";
+              setTimeout(() => {
+                window.location.reload();
+              }, 2000);
+              return;
+            }
+
+            document.querySelector("#walletError").style.visibility = "hidden";
+
+            document.querySelector("#loader").style.display = "block";
+            document.querySelector("#landing-section").style.display = "none";
+            document.querySelector("#game").style.display = "block";
+            document.querySelector("#loader").style.display = "none";
+            document.querySelector("#tutorialImage").style.display = "none";
+
+            movePlayer = true;
+
+            controlMainSong(defaultSong, "play");
+            attachEventListeners();
+          }
+        });
+    </script>
+
+    <!-- modal script -->
+    <script>
+      const populateModal = (heading, paragraph, link = "") => {
+        document.querySelector(".modal div").innerHTML = "";
+        document.querySelector(".modal h2").textContent = "";
+        document.querySelector(".modal h2").textContent = `${heading}`;
+        // document.querySelector(".modal div").innerHTML = `<p style="text-align: center; padding: 4px; border-radius: 4px">${paragraph}</p>`
+
+        for (let i = 0; i < paragraph.length; i++) {
+          let p = document.createElement("p");
+          p.style.textAlign = "justify";
+          p.style.padding = "4px";
+          p.style.borderRadius = "4px";
+
+          p.innerHTML = paragraph[i];
+
+          if (heading == "Know why that was right?")
+            p.style.background = "rgba(0,255,0,0.5)";
+
+          document.querySelector(".modal div").appendChild(p);
+        }
+
+        if (heading == "GAME SUMMARY") {
+          document.querySelector(".btn-close").style.display = "none";
+        }
+
+        if (heading == "Know why that was right?") {
+          let div = document.createElement("div");
+          div.style.textAlign = "center";
+          div.style.margin = "7px";
+          div.innerHTML = "👉🏼" + link;
+          document.querySelector(".modal div").appendChild(div);
+          // positionModal()
+        }
+      };
+
+      document.querySelector("#openModal").addEventListener("click", () => {
+        document.querySelector("#openModal").style.pointerEvents = "none";
+        document.querySelector(".musicOptions").style.pointerEvents = "none";
+
+        toggleZIndex("openModal");
+        document.querySelector(".modal div").innerHTML = "";
+        document.querySelector(".modal h2").innerHTML = "Transaction Logs";
+
+        let target = document.querySelector(".modal div");
+
+        let totalTxns = 0;
+        for (let keys in transactions) {
+          totalTxns++;
+          let p = document.createElement("p");
+
+          let a = document.createElement("a");
+          a.target = "__blank";
+          a.style.textDecoration = "none";
+          a.href = `${transactions[keys]["explorer"]}/tx/${transactions[keys]["txnHash"]}`;
+
+          const isReward =
+            transactions[keys].memo.includes("completion reward") ||
+            transactions[keys].memo.includes("streak reward") ||
+            transactions[keys].memo.includes("rewards");
+
+          p.style.color = isReward ? "black" : "white";
+
+          p.innerHTML = isReward
+            ? `${totalTxns}. Received ETN for ${
+                transactions[keys].memo
+              } at ${new Date(
+                parseInt(transactions[keys].trx)
+              ).toLocaleString()}`
+            : `${totalTxns}. Spent ETN for ${
+                transactions[keys].memo
+              } at ${new Date(
+                parseInt(transactions[keys].trx)
+              ).toLocaleString()}`;
+
+          p.style.background = isReward
+            ? "rgba(0, 255, 0, 0.5)" // Green background for rewards
+            : "rgba(255, 0, 0, 0.5)"; // Red background for spent ETN
+
+          p.style.padding = "4px";
+          p.style.textAlign = "justify";
+          p.style.borderRadius = "4px";
+
+          a.appendChild(p);
+          target.appendChild(a);
+        }
+
+        console.log("TXN COUNT IS: " + totalTxns);
+
+        if (totalTxns == 0) {
+          document.querySelector(".modal h2").textContent = `Transaction Logs`;
+          let p = document.createElement("p");
+          p.textContent = "No transaction has yet been processed";
+          p.style.backgroundColor = "rgba(21,175,100,0.5)";
+          p.style.padding = "4px";
+          p.style.textAlign = "center";
+          p.style.borderRadius = "4px";
+
+          target.appendChild(p);
+        }
+
+        toggleClasses.forEach((el) => {
+          el.classList.remove("hidden");
+        });
+        positionModal();
+      });
+
+      function resetStyling() {
+        toggleZIndex();
+        timer.style.display = "none";
+        paymentFlow.style.display = "none";
+        confirmation.style.display = "none";
+        paymentDetails.style.display = "none";
+        closeModalBtn.style.display = "block";
+        document.querySelector("#showStreak").style.display = "none";
+        document.querySelector("#weeklySection").style.display = "none";
+
+        step1.style.filter = "grayscale(100%)";
+        step2.style.filter = "grayscale(100%)";
+        step4.style.filter = "grayscale(100%)";
+        document.querySelector(".modal div").style.display = "block";
+      }
+
+      const closeModal = function () {
+        resetStyling();
+        toggleClasses.forEach((el) => el.classList.toggle("hidden"));
+
+        document.querySelector("#streak").style.pointerEvents = "auto";
+        document.querySelector("#openModal").style.pointerEvents = "auto";
+        document.querySelector(".musicOptions").style.pointerEvents = "auto";
+        document.querySelector("#weeklyRewards").style.pointerEvents = "auto";
+      };
+
+      closeModalBtn.addEventListener("click", closeModal);
+    </script>
+
+    <!--for handling the landing section stuff-->
+    <script>
+      const reasons = [
+        "4-in-1 game that will make you fall in love with learing",
+        "An easy-to-use game made by 'Electroneum' Blockchain",
+        "Increase awareness among masses about Blockchain with interesting games",
+        "These are some of the mind-sharpening games that increase knowledge about various topics with ease",
+        "Some cool features that make you play game daily",
+      ];
+      const fullForms = [
+        "ETN Town",
+        "Playful arena",
+        "Leveraging Blockchain",
+        "Advocate trending technology",
+        "Your go to place",
+      ];
+
+      const fullFormDiv = document.querySelector("#full-form");
+      const reasoningDiv = document.querySelector("#reasoning");
+
+      function startAnimation() {
+        document.querySelectorAll("#letters img").forEach((letter, ind) => {
+          setTimeout(() => {
+            // Hide the text first (fade-out)
+            fullFormDiv.style.opacity = 0;
+            reasoningDiv.style.opacity = 0;
+
+            setTimeout(() => {
+              // Update the content
+              reasoningDiv.textContent = reasons[ind];
+              fullFormDiv.textContent = fullForms[ind];
+
+              // Fade the text back in (fade-in)
+              fullFormDiv.style.opacity = 1;
+              reasoningDiv.style.opacity = 1;
+
+              letter.style.filter = "grayscale(0)";
+            }, 500); // Short delay to allow fade-out before updating text
+
+            // Reset after all letters are traversed
+            if (ind === document.querySelectorAll("#letters img").length - 1) {
+              setTimeout(() => {
+                document.querySelectorAll("#letters img").forEach((letter) => {
+                  letter.style.filter = "grayscale(100%)";
+                });
+                startAnimation(); // Restart animation
+              }, 4000); // 4-second break before restarting
+            }
+          }, ind * 3000); // Delay between each letter's appearance
+        });
+      }
+
+      // Start the animation cycle
+      startAnimation();
+
+      const gsapAnimations = [
+        // 0. Smile animation
+        {
+          duration: 2, // Duration for the full motion
+          x: (i) => i * 30 - 60, // Moves letters horizontally
+          y: (i) => Math.sin(i * 0.7) * 50 - 20, // Bends letters to form a smile (curve)
+          rotate: (i) => i * 10 - 20, // Slight rotation for a curved look
+          ease: "power1.inOut", // Smooth easing effect
+          repeat: -1, // Repeat infinitely
+          yoyo: true, // Reverse the animation to create a loop
+          stagger: 0.2, // Stagger the animation so each letter moves with a small delay
+        },
+        // 1. Vertical movement and rotation
+        {
+          duration: 1.5, // Duration of the animation for each letter
+          y: (i) => (i % 2 === 0 ? -20 : 20), // Alternating vertical movement (up for even letters, down for odd)
+          rotate: (i) => (i % 2 === 0 ? 10 : -10), // Alternating rotation (clockwise for even, counterclockwise for odd)
+          ease: "power2.inOut", // Smooth easing for the motion
+          stagger: 0.2, // Stagger between letters
+          repeat: -1, // Repeat infinitely
+          yoyo: true, // Reverse the animation to make it continuous
+        },
+        // 2. Zoom In and Rotate
+        {
+          duration: 1.5,
+          scale: 1.3, // Scale up the letters
+          rotate: 360, // Rotate a full circle
+          ease: "power1.inOut", // Smooth transition for scaling and rotation
+          stagger: 0.2, // Delay between each letter
+          repeat: -1,
+          yoyo: true, // Reverse back to original size and rotation
+        },
+        // 3. Wave and Float Effect
+        {
+          duration: 2,
+          y: (i) => Math.sin(i * 1.5) * 30, // Create wave effect with vertical motion
+          rotate: (i) => i * 15 - 30, // Rotate letters slightly
+          ease: "sine.inOut", // Smooth wave motion
+          stagger: 0.25, // Delay for wave effect
+          repeat: -1,
+          yoyo: true, // Reverse motion for continuous wave
+        },
+        // 4. Flip and Slide Up
+        {
+          duration: 1.2,
+          y: -50, // Slide letters upwards
+          rotateX: 180, // Flip letters vertically
+          ease: "power2.out", // Smooth easing for the flip
+          stagger: 0.3, // Delay between letters
+          repeat: -1,
+          yoyo: true, // Reverse the flip and slide for continuous effect
+        },
+        // 5. Horizontal Slide and Bounce Effect
+        {},
+      ];
+
+      const animationInd = Math.floor(Math.random() * gsapAnimations.length);
+
+      if (animationInd == 5) {
+        gsap.fromTo(
+          "#letters img",
+          {
+            x: (i) => (i % 2 === 0 ? -100 : 100), // Slide from left for even letters, right for odd
+          },
+          {
+            duration: 1.5,
+            x: 0, // Move to the center (normal position)
+            ease: "bounce.out", // Add bounce effect
+            stagger: 0.3, // Delay between each letter
+            repeat: -1,
+            yoyo: true,
+          }
+        );
+      } else {
+        gsap.to("#letters img", gsapAnimations[animationInd]);
+      }
+    </script>
+
+    <!-- populate Tutorial -->
+    <script>
+      let imageDiv = document.querySelector("#imageDiv");
+      let heading = document.querySelector("#heading");
+      let image = document.querySelector("#image");
+      let para = document.querySelector("#para");
+
+      let currentTutorial = 0;
+
+      const headings = [
+        "1. Why this game?",
+        "2. Flip the tiles game basics",
+        "3. Maze runner game basics",
+        "4. Video Q&A game basics",
+        "5. Personal room (stats)",
+        "6. Name Place Animal Thing game",
+      ];
+      const images = [
+        "./img/i1.png",
+        "./img/i2.png",
+        "./img/i3.png",
+        "./img/i4.png",
+        "./img/i5.png",
+        "./img/i6.png",
+      ];
+      const paras = [
+        "This is a bare-javascript game that has the capabilities to beat any proficient game out in the market. Games are undoubtedly the logical sharpeners for our brains and if a game like this meets the power of Web3 then the functionalities are taken into cloud nine. With a combo of 4 functional games and lots of add-ons, the user won't be bored at any point of time and will cater knowledge throughout the process",
+        "This is a tile-matching game that has either 9 or 15 tiles according to the difficulty level. A correct answer will comprise three co-related tiles pertaining to either of the 4 topics that I have chosen: Data Structures & Algo (DSA), Operating System (OS), Tron & DBMS. Hints will also be there.",
+        "Time will be chasing the player. Make it to the exit and beat a level, it is all about adventure and cognitive skills. A total of 6 levels are there to test you against some of the hard mazes. Time will vary from one level to another. Once lost, you have to start over again from level 1. Help the player to reach the house which is at the end of the levels",
+        "There will be 9 videos related to varying domains (Technology, History & Environment) to make sure that at the expense of playing the game, the user learns a lot and also enjoys. The top scorer of each week will automatically get some ETN.",
+        "Before ending the current session, it is beneficial to see the stats gathered throughout the gaming tenure, so visit this room at the end as there is no way out of this room. Visit it, see the stats and close the game. To get out of any game room, use BACKSPACE.",
+        "A digital makeover of the classic game where the player has to provide various things starting with the given alphabet. 30 seconds are there on the clock, fill up all the 4 things, or else loose score. Each day, 4 alphabets are shown. Answers for already attempted questions will be shown",
+      ];
+
+      const leftOperation = (ind) => {
+        if (ind > 0) populateTutorial(ind - 1);
+      };
+
+      const rightOperation = (ind) => {
+        if (ind < images.length) populateTutorial(ind + 1);
+      };
+
+      const populateTutorial = (ind = 0) => {
+        currentTutorial = ind;
+
+        image.style.borderRadius = "10px";
+
+        para.style.width = "50%";
+        para.style.fontSize = "1.3rem";
+        para.style.borderRadius = "10px";
+
+        swap(imageDiv, para);
+        getCoordinates();
+
+        let leftKey = document.querySelector("#leftKey");
+        let rightKey = document.querySelector("#rightKey");
+
+        leftKey.style.visibility = "visible";
+        rightKey.style.visibility = "visible";
+
+        if (ind == 0) leftKey.style.visibility = "hidden";
+        if (ind == headings.length - 1) rightKey.style.visibility = "hidden";
+
+        heading.textContent = headings[ind];
+        heading.style.padding = "0.5rem";
+        image.src = images[ind];
+        image.style.width = "450px";
+        image.style.height = "200px";
+        para.textContent = paras[ind];
+      };
+
+      const swap = (nodeA, nodeB) => {
+        const parentA = nodeA.parentNode;
+        const siblingA =
+          nodeA.nextSibling === nodeB ? nodeA : nodeA.nextSibling;
+
+        nodeB.parentNode.insertBefore(nodeA, nodeB);
+        parentA.insertBefore(nodeB, siblingA);
+      };
+
+      document.querySelector("#tutorialImage").addEventListener("click", () => {
+        if (document.querySelector("#tutorial").style.display == "none") {
+          document.querySelector("#landing-section").style.display = "none";
+          document.querySelector("#tutorial").style.display = "flex";
+
+          populateTutorial();
+        } else {
+          document.querySelector("#landing-section").style.display = "flex";
+          document.querySelector("#tutorial").style.display = "none";
+        }
+      });
+
+      function getCoordinates() {
+        para.style.startX = imageDiv.getBoundingClientRect().x;
+        imageDiv.style.startX = imageDiv.getBoundingClientRect().x;
+      }
+    </script>
+
+    <!-- checking for the errorneous case -->
+    <script>
+      function showErrorDivision(reason = "general") {
+        const bodyChildren = document.querySelectorAll("body > *");
+
+        document.querySelector("#errorDivision ul").innerHTML =
+          reason == "general"
+            ? `<li>The current screen size is not optimal. Try on a larger screen device</li>`
+            : `<li>${reason}</li>`;
+
+        bodyChildren.forEach((child) => {
+          child.style.display = child.id !== "errorDivision" ? "none" : "block";
+        });
+      }
+
+      setInterval(() => {
+        if (window.innerWidth < 1100 || window.innerHeight < 500) {
+          showErrorDivision();
+        }
+      }, "1000");
+    </script>
+  </body>
+</html>

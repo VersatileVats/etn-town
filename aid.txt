@@ -1,0 +1,16 @@
+Chain IDs:
+    ETN testnet: 0x4f5e0c (5201420)
+    ETN mainnet: 0xcb2e   (52014)
+
+Chain ID received from metamask are in the "hex" format
+
+Network details: https://developer.electroneum.com/electroneum-stack/metamask
+
+https://blockexplorer.thesecurityteam.rocks/tx/
+https://blockexplorer.electroneum.com/tx/
+
+Main account  : 0xe50058eaFB009bfa754e1020CD133E42db0fbc6c
+    Private key: c3769d40271bf72b087a59c8087cefe593bbffb329eb1625ab170c3f8dc359a0
+
+Second account: 0xf27F1A306E6ADA94Acb32481168cA73127c0E7B1
+    Private key: 3c614be941ac04bd1c720325cab1ed19edd0b1eee9908f1f06e4e7e66313cb5f
